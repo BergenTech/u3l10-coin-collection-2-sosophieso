@@ -1,8 +1,11 @@
 // Game variables 
 let playerX, playerY;
 let coinX, coinY;
+let coinCollected = false;
 let obstacleX, obstacleY;
 let score = 0;
+let hits = 0;
+let speed = 5;
 let gameOver = false;
 
 function setup() {
@@ -97,6 +100,7 @@ function moveObstacle() {
 
 function checkCoinCollection() {
   if (dist(playerX, playerY, coinX, coinY) < 15 && !coinCollected) {
+    coinCollected = true
     score ++
   }
   // TODO: Check if player touches coin
@@ -108,6 +112,12 @@ function checkCoinCollection() {
 }
 
 function checkCollisions() {
+  if (dist(playerX, playerY, obstacleX, obstacleY) < 20) {
+    hits ++
+    if (hits >= 3) {
+      displayGameOver();
+    }
+  }
   // TODO: Check if player hits obstacle
   // HINT: Similar to coin collection
   // If hit (distance < 20):
@@ -119,7 +129,10 @@ function checkCollisions() {
 function displayStats() {
   fill(0);
   textSize(16);
-  text("Score: " + score, 10, 20);
+  textAlign(CENTER, CENTER)
+  text("Score: " + score, 50, 20);
+  text("Hits: " + hits, 200, 20);
+  text("Speed: " + speed, 350, 20);
   // TODO: Add display for hits and speed
 }
 
