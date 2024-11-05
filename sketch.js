@@ -98,6 +98,7 @@ function moveObstacle() {
   if (obstacleY > height) {
     obstacleX = random(20, height - 20)
     obstacleY = 0
+    speed += 1
   }
 }
 
@@ -160,11 +161,13 @@ function displayGameOver() {
   textSize(32)
   text("Game Over", width/2, height/2 - 20)
   textSize(16)
-  text("Score: " + score, width/2, height/2 + 20)
+  text("Score: " + score, width/2, height/2 + 15)
+  text("Press R to Restart", width/2, height/2 + 40)
 }
 
 function newCoin() {
   // Generate random position for coin
+  coinCollected = false;
   coinX = random(20, width-20);
   coinY = random(20, height-20);
 }
